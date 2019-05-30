@@ -1,0 +1,56 @@
+<!-- product category -->
+<section id="aa-product-details">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="aa-product-details-area">
+          <!-- Related product -->
+          <div class="aa-product-related-item">
+            <h3>Related Products</h3>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4"
+                  *ngFor="let product of products$ | async | paginate: { itemsPerPage: 3, currentPage: page }">
+                  <div class="card mb-4 shadow-sm">
+                    <img *ngIf="product.productPhoto" [src]="'data:Image/jpg;base64,' + product.productPhoto"
+                      alt="image" class="bd-placeholder-img card-img-top" style="width: 100% ;height: 350px;"
+                      aria-label="Placeholder: Thumbnail" />
+                    <div class="card-body">
+                      <p class="card-text">productName: {{product.productName}}</p>
+                      <p class="card-text">productPrice: {{product.productPrice}}</p>
+                      <p class="card-text">
+                        <ngb-rating [(rate)]="product.rating">
+                          <ng-template let-fill="fill" let-index="index">
+                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                          </ng-template>
+                        </ngb-rating>
+                      </p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="aa-prod-view-bottom">
+                          <button type="button" class="aa-add-to-cart-btn"
+                            (click)="view(product.productId)">View</button>
+                          <button type="button" class="aa-add-to-cart-btn" style="margin: 6px" (click)="addToCart(product)">Add To
+                            Card</button>
+                          <button type="button" class="aa-add-to-cart-btn" (click)="back()">Back</button>
+                        </div>
+                        <small class="text-muted">{{product.productDate | date}}</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <pagination-controls class="d-flex justify-content-center" style="font-size: 22px"
+                (pageChange)="page = $event" directionLinks="true" autoHide="true" responsive="true"
+                previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+                screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+              </pagination-controls>
+              <hr />
+              <pre>Current page: {{ page }}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / product category -->

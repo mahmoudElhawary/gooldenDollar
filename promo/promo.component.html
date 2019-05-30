@@ -1,0 +1,112 @@
+<!-- Start Promo section -->
+<section id="aa-promo" *ngIf="products$">
+  <div class="container">
+    <hr />
+    <h1 style="display: flex">All Products</h1>
+    <div class="row">
+      <div
+        class="col-xs-12 col-sm-6 col-md-4"
+        *ngFor="
+          let product of (products$
+            | async
+            | paginate: { itemsPerPage: 3, currentPage: page })
+        "
+        (click)="addToCart(product)"
+      >
+        <article class="card-wrapper">
+          <div class="image-holder">
+            <a style="cursor: pointer;" class="image-holder__link"></a>
+            <div
+              class="image-liquid image-holder--original"
+              [style.background]="
+                'url(data:Image/jpg;base64,' + product.productPhoto + ')'
+              "
+            ></div>
+          </div>
+
+          <div class="product-description">
+
+              <!-- title -->
+              <h1 class="product-description__title">
+                <a
+                  style="cursor: pointer;text-align:left"
+                  (click)="view(product.productId)"
+                >
+                  {{ product.productName }}
+                </a>
+              </h1>
+            <!-- category and price -->
+            <div class="row">
+              <div
+                class="col-xs-12 col-sm-8 product-description__category secondary-text"
+                style="cursor: pointer;"
+                (click)="
+                  viewBySubCategory(product.productCategory.subCategoryName)
+                "
+              >
+                {{ product.productCategory.mainCategoryName }} --
+                {{ product.productCategory.subCategoryName }}
+              </div>
+              <div class="col-xs-12 col-sm-4 product-description__price">
+                € {{ product.productPrice }}
+              </div>
+            </div>
+
+            <!-- divider -->
+            <hr />
+            <div class="row">
+            <!-- sizes -->
+            <div class="sizes-wrapper">
+              <b>Sizes</b>
+              <br />
+              <span class="secondary-text text-uppercase">
+                <ul class="list-inline">
+                  <li>{{ product.size }}</li>
+                </ul>
+              </span>
+            </div>
+            <button
+                class="btn btn-success"
+                style="font-size: 15px;cursor: pointer; text-align: right; margin-left: 30%;float: right;height: 26px;"
+                (click)="view(product.productId)"
+                >view details</button
+              >
+          </div>
+            <div class="color-wrapper">
+              <b>Rating</b>
+              <span class="secondary-text text-uppercase">
+                <ngb-rating [(rate)]="product.rating">
+                  <ng-template let-fill="fill" let-index="index">
+                    <span
+                      class="star"
+                      [class.filled]="fill === 100"
+                      [class.bad]="index < 3"
+                      >&#9733;</span
+                    >
+                  </ng-template>
+                </ngb-rating>
+              </span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <pagination-controls
+      class="d-flex justify-content-center"
+      style="font-size: 22px"
+      (pageChange)="page = $event"
+      directionLinks="true"
+      autoHide="true"
+      responsive="true"
+      previousLabel="Previous"
+      nextLabel="Next"
+      screenReaderPaginationLabel="Pagination"
+      screenReaderPageLabel="page"
+      screenReaderCurrentLabel="You're on page"
+    >
+    </pagination-controls>
+    <hr />
+    <pre>Current page: {{ page }}</pre>
+  </div>
+</section>
+<!-- / Promo section -->

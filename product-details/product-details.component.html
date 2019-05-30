@@ -1,0 +1,86 @@
+<!-- product category -->
+<section id="aa-product-details" *ngIf="products$">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="aa-product-details-area">
+          <div class="aa-product-details-content">
+            <div class="row">
+              <!-- Modal view slider -->
+              <div class="col-md-5 col-sm-5 col-xs-12" *ngFor="let product of (products$ | async)">
+                <div class="aa-product-view-slider">
+                  <div id="demo-1" class="simpleLens-gallery-container">
+                    <div class="simpleLens-container">
+                      <div class="simpleLens-big-image-container">
+                        <a data-lens-image="/assets/img/view-slider/large/polo-shirt-1.png"
+                          class="simpleLens-lens-image"><img [src]="'data:Image/jpg;base64,' + product.productPhoto"
+                            class="simpleLens-big-image" /></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal view content -->
+              <div class="col-md-7 col-sm-7 col-xs-12" *ngFor="let product of (products$ | async)">
+                <div class="aa-product-view-content">
+                  <h3>productName: {{product.productName}}</h3>
+                  <div class="aa-price-block">
+                    <span class="aa-product-view-price">productPrice: {{product.productPrice}} $</span>
+                    <p class="aa-product-avilability">
+                      Avilability: <span>{{product.productCondition}}</span>
+                    </p>
+                  </div>
+                  <p>
+                    productDescription: {{product.productDescription}}
+                  </p>
+                  <h4>Size: {{product.size}}</h4>
+                  <h4>Color</h4>
+                  <div class="aa-color-tag">
+                    <a href="#" class="aa-color-{{product.color}}"></a>
+                  </div>
+                  <div class="aa-prod-view-bottom">
+                    <a class="aa-add-to-cart-btn" style="cursor: pointer;" (click)="addToCart(product)">Add To Cart</a>
+                    <a class="aa-add-to-cart-btn" style="cursor: pointer;">Wishlist</a>
+                    <a class="aa-add-to-cart-btn" style="cursor: pointer;">Compare</a>
+                    <a class="aa-add-to-cart-btn" style="cursor: pointer;"
+                      (click)="getProducts(product.productCategory.subCategoryName)">Related Products</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Related product -->
+          <div class="aa-product-related-item">
+            <h3>Related Products</h3>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4" *ngFor="let product of (subCategories$ | async)">
+                  <div class="card mb-4 shadow-sm">
+                    <img *ngIf="product.productPhoto" [src]="'data:Image/jpg;base64,' + product.productPhoto"
+                      alt="image" class="bd-placeholder-img card-img-top" style="width: 100% ;height: 350px;"
+                      aria-label="Placeholder: Thumbnail" />
+                    <div class="card-body">
+                      <p class="card-text">{{product.productName}}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary"
+                            (click)="view(product.productId)">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary"
+                            (click)="addToCart(product)">Add To Card</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="back()">Back</button>
+                        </div>
+                        <small class="text-muted">{{product.productDate | date}}</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / product category -->

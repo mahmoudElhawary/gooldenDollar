@@ -1,0 +1,62 @@
+<!-- start contact section -->
+<section id="aa-contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="aa-contact-area">
+          <!-- Contact address -->
+          <div class="aa-contact-address">
+            <h2>All Users</h2>
+            <hr>
+            <div class="row">
+              <div class="col-md-4"
+                *ngFor="let user of users$ | async | paginate: { itemsPerPage: 3, currentPage: page }">
+                <div class="card" style="cursor: pointer">
+                  <header (click)="show(user.id)">
+                    <h1>{{user.firstName}} {{user.lastName}}</h1>
+                    <h2>{{user.userAddress.address}}</h2>
+                    <img [src]="'data:Image/jpg;base64,' + user.userPhoto" class="avatar" />
+                  </header>
+                  <article>
+                    <p>{{user.email}}</p>
+                  </article>
+
+                  <footer>
+                    <h3>Find <span style="color: turquoise" (click)="show(user.id)">{{user.firstName}} {{user.lastName}}</span> online</h3>
+                    <ul class="list-unstyled">
+                      <li *ngIf="user.socialMedia.facebook"><a href="{{user.socialMedia.facebook}}"><i
+                            class="fa fa-fw fa-facebook"></i> facebook</a></li>
+                      <li *ngIf="user.socialMedia.twitter"><a href="{{user.socialMedia.twitter}}"><i
+                            class="fa fa-fw fa-twitter"></i> twitter</a></li>
+                      <li *ngIf="user.socialMedia.googlePlus"><a href="{{user.socialMedia.googlePlus}}"><i
+                            class="fa fa-fw fa-google"></i> googlePlus</a></li>
+                      <li *ngIf="user.socialMedia.githup"><a href="{{user.socialMedia.githup}}"><i
+                            class="fa fa-fw fa-github"></i> Github</a></li>
+                      <li *ngIf="user.socialMedia.linkedIn"><a href="{{user.socialMedia.linkedIn}}"><i
+                            class="fa fa-fw fa-linkedIn"></i> linkedIn</a></li>
+                      <li *ngIf="user.socialMedia.instagram"><a href="{{user.socialMedia.instagram}}"><i
+                            class="fa fa-fw fa-instagram"></i> instagram</a></li>
+                    </ul>
+                    <hr>
+                    <p class="cf">
+                      <small>
+                        <a class="align-left share" href="#"><i class="fa fa-fw fa-share"></i> share</a>
+                        <a href="#" class="align-right alert">report <i class="fa fa-fw fa-exclamation"></i></a>
+                      </small>
+                    </p>
+                  </footer>
+                </div>
+                <!--end card-->
+              </div>
+            </div>
+            <pagination-controls class="d-flex justify-content-center" style="font-size: 22px"
+              (pageChange)="page = $event" directionLinks="true" autoHide="true" responsive="true"
+              previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+              screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

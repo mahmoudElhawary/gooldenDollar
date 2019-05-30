@@ -1,0 +1,313 @@
+<!-- start contact section -->
+<section id="aa-contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="aa-contact-area">
+          <!-- Contact address -->
+          <div class="aa-contact-address">
+            <h2>Create User</h2>
+            <div class="alert alert-danger" *ngIf="!uniqeEmail">
+              email must be a unique
+            </div>
+            <form [formGroup]="signupForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="firstName">First Name*:</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="firstName"
+                      formControlName="firstName" />
+                    <div class="alert alert-danger" *ngIf="
+                            signupForm.controls.firstName.errors &&
+                            (signupForm.controls.firstName.touched ||
+                              signupForm.controls.firstName.dirty)
+                          ">
+                      <div *ngIf="signupForm.hasError('required', 'firstName')">
+                        firstName* is required
+                      </div>
+                      <div *ngIf="signupForm.hasError('minlength', 'firstName')">
+                        firstName is minlength 5
+                      </div>
+                      <div *ngIf="signupForm.hasError('maxlength', 'firstName')">
+                        firstName is maxlength 15
+                      </div>
+                      <div *ngIf="signupForm.hasError('pattern', 'firstName')">
+                        firstName must like this mahmoud
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="lastName">Last Name*:</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="lastName"
+                      formControlName="lastName" />
+                    <div class="alert alert-danger" *ngIf="
+                            signupForm.controls.lastName.errors &&
+                            (signupForm.controls.lastName.touched ||
+                              signupForm.controls.lastName.dirty)
+                          ">
+                      <div *ngIf="signupForm.hasError('required', 'lastName')">
+                        lastName* is required
+                      </div>
+                      <div *ngIf="signupForm.hasError('minlength', 'lastName')">
+                        lastName is minlength 5
+                      </div>
+                      <div *ngIf="signupForm.hasError('maxlength', 'lastName')">
+                        lastName is maxlength 15
+                      </div>
+                      <div *ngIf="signupForm.hasError('pattern', 'lastName')">
+                        lastName must like this mahmoud
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email">Email address*:</label>
+                    <input type="email" class="form-control" id="email" placeholder="email" name="email"
+                      formControlName="email" />
+                    <div class="alert alert-danger" *ngIf="
+                            signupForm.controls.email.errors &&
+                            (signupForm.controls.email.touched ||
+                              signupForm.controls.email.dirty)
+                          ">
+                      <div *ngIf="signupForm.hasError('required', 'email')">
+                        email* is required
+                      </div>
+                      <div *ngIf="signupForm.hasError('minlength', 'email')">
+                        email is minlength 8
+                      </div>
+                      <div *ngIf="signupForm.hasError('maxlength', 'email')">
+                        email is maxlength
+                      </div>
+                      <div *ngIf="signupForm.hasError('email', 'email')">
+                        Email must be a valid email address
+                      </div>
+                      <div *ngIf="uniqeEmail == false">
+                        Email must be a uniqe email address
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="password">password*:</label>
+                    <input type="password" class="form-control" id="password" name="password" formControlName="password"
+                      placeholder="password" />
+                    <div class="alert alert-danger" *ngIf="
+                            signupForm.controls.password.errors &&
+                            (signupForm.controls.password.touched ||
+                              signupForm.controls.password.dirty)
+                          ">
+                      <div *ngIf="signupForm.hasError('required', 'password')">
+                        password* is required
+                      </div>
+                      <div *ngIf="signupForm.hasError('pattern', 'password')">
+                        password Must contain at least one number and one uppercase
+                        and lowercase letter, and at least 8 or more characters
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="image">User Photo*:</label>
+                    <input type="file" class="form-control" id="file" name="file" accept="image/*" style="height: 100%;"
+                      (change)="onSelectFile($event)" required />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="role">Role*:</label>
+                    <select name="role" id="role" formControlName="role" class="form-control">
+                      <option value="">Select User Role</option>
+                      <option value="USER">USER</option>
+                      <option value="ADMIN">ADMIN</option>
+                    </select>
+                    <div class="alert alert-danger" *ngIf="
+                            signupForm.controls.role.errors &&
+                            (signupForm.controls.role.touched ||
+                              signupForm.controls.role.dirty)
+                          ">
+                      <div *ngIf="signupForm.hasError('required', 'role')">
+                        role* is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="gender">gender*:</label>
+                    <select name="gender" id="gender" formControlName="gender" class="form-control">
+                      <option value="">Select User Gender</option>
+                      <option value="male">Male</option>
+                      <option value="femal">Femal</option>
+                    </select>
+                    <div class="alert alert-danger" *ngIf="
+                            signupForm.controls.gender.errors &&
+                            (signupForm.controls.gender.touched ||
+                              signupForm.controls.gender.dirty)
+                          ">
+                      <div *ngIf="signupForm.hasError('required', 'gender')">
+                        gender* is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="age">Age*:</label>
+                    <input type="text" class="form-control" id="age" name="age" formControlName="age"
+                      placeholder="age" />
+                    <div class="alert alert-danger" *ngIf="
+                                signupForm.controls.age.errors &&
+                                (signupForm.controls.age.touched ||
+                                  signupForm.controls.age.dirty)
+                              ">
+                      <div *ngIf="signupForm.hasError('required', 'age')">
+                        age* is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div formGroupName="userAddress">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="address">address*:</label>
+                        <input type="text" class="form-control" id="address" name="address" formControlName="address"
+                          placeholder="address" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="age">country*:</label>
+                        <input type="text" class="form-control" id="country" name="country" formControlName="country"
+                          placeholder="country" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="city">city*:</label>
+                        <input type="text" class="form-control" id="city" name="city" formControlName="city"
+                          placeholder="city" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="state">state*:</label>
+                        <input type="text" class="form-control" id="state" name="state" formControlName="state"
+                          placeholder="state" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div formGroupName="socialMedia">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="facebook">facebook*:</label>
+                      <input type="text" class="form-control" id="facebook" name="facebook" formControlName="facebook"
+                        placeholder="facebook" />
+
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="twitter">twitter*:</label>
+                      <input type="text" class="form-control" id="twitter" name="twitter" formControlName="twitter"
+                        placeholder="twitter" />
+
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="githup">githup*:</label>
+                      <input type="text" class="form-control" id="githup" name="githup" formControlName="githup"
+                        placeholder="githup" />
+
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="googlePlus">googlePlus*:</label>
+                      <input type="text" class="form-control" id="googlePlus" name="googlePlus"
+                        formControlName="googlePlus" placeholder="googlePlus" />
+
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="instagram">instagram*:</label>
+                      <input type="text" class="form-control" id="instagram" name="instagram"
+                        formControlName="instagram" placeholder="instagram" />
+
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="linkedIn">linkedIn*:</label>
+                      <input type="text" class="form-control" id="linkedIn" name="linkedIn" formControlName="linkedIn"
+                        placeholder="linkedIn" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid && !uniqeEmail"
+                (click)="signup(signupForm)">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="aa-contact">
+  <div class="container">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6"
+          *ngFor="let user of users$ | async | paginate: { itemsPerPage: 2, currentPage: page }">
+          <div class="well well-sm">
+            <div class="row">
+              <div class="col-sm-6 col-md-4">
+                <img [src]="'data:Image/jpg;base64,' + user.userPhoto" alt="mahmoud elhawary"
+                  class="img-rounded img-responsive" />
+              </div>
+              <div class="col-sm-6 col-md-8">
+                <h4>
+                  {{user.firstName}} {{user.lastName}}</h4>
+                <small><cite title="San Francisco, USA">{{user.gender}}<i class="glyphicon glyphicon-map-marker">
+                    </i></cite></small>
+                <p>
+                  <i class="glyphicon glyphicon-envelope"></i>{{user.email}}
+                  <br />
+                  <i class="glyphicon glyphicon-globe"></i><a>{{user.role}}</a>
+                  <br />
+                  <i class="glyphicon glyphicon-gift"></i>{{user.createdDate | date: 'shortDate'}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pagination-controls class="d-flex justify-content-center" style="font-size: 22px" (pageChange)="page = $event"
+      directionLinks="true" autoHide="true" responsive="true" previousLabel="Previous" nextLabel="Next"
+      screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+    </pagination-controls>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+.example-small-box,
+.example-large-box {
+  align-items: center;
+}
+
+.example-large-box {
+  height: 500px;
+  width: 900px;
+}
+.star {
+  font-size: 2.3rem;
+  color: #f30c0c;
+}
+.filled {
+  color: #ffcb1e;
+}

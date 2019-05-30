@@ -1,0 +1,580 @@
+
+<!-- Cart view section -->
+<section id="checkout">
+  <div class="container">
+    <h1>Check Out Page</h1>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="checkout-area">
+          <form [formGroup]="ShippingForm">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="checkout-left">
+                  <div class="panel-group" id="accordion">
+                    <!-- Coupon section -->
+                    <div class="panel panel-default aa-checkout-coupon">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a
+                            data-toggle="collapse"
+                            data-parent="#accordion"
+                            href="#collapseOne"
+                          >
+                            Have a Coupon?
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                          <input
+                            type="text"
+                            placeholder="Coupon Code"
+                            class="aa-coupon-code"
+                          />
+                          <input
+                            type="submit"
+                            value="Apply Coupon"
+                            class="aa-browse-btn"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Login section -->
+                    <div
+                      class="panel panel-default aa-checkout-login"
+                      *ngIf="!loginUser"
+                    >
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a
+                            data-toggle="collapse"
+                            data-parent="#accordion"
+                            href="#collapseTwo"
+                          >
+                            Client Login
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseTwo" class="panel-collapse collapse">
+                        <form [formGroup]="loginForm">
+                          <div class="panel-body">
+                            <p>
+                              please login to continue to complete your order
+                            </p>
+                            <div class="form-group">
+                              <label for="email">Email address*:</label>
+                              <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                placeholder="email"
+                                name="email"
+                                formControlName="email"
+                              />
+                              <div
+                                class="alert alert-danger"
+                                *ngIf="
+                                  loginForm.controls.email.errors &&
+                                  (loginForm.controls.email.touched ||
+                                    loginForm.controls.email.dirty)
+                                "
+                              >
+                                <div
+                                  *ngIf="
+                                    loginForm.hasError('required', 'email')
+                                  "
+                                >
+                                  email* is required
+                                </div>
+                                <div
+                                  *ngIf="
+                                    loginForm.hasError('minlength', 'email')
+                                  "
+                                >
+                                  email is minlength 8
+                                </div>
+                                <div
+                                  *ngIf="
+                                    loginForm.hasError('maxlength', 'email')
+                                  "
+                                >
+                                  email is maxlength
+                                </div>
+                                <div
+                                  *ngIf="loginForm.hasError('email', 'email')"
+                                >
+                                  Email must be a valid email address
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="password">password*:</label>
+                              <input
+                                type="password"
+                                class="form-control"
+                                id="password"
+                                name="password"
+                                formControlName="password"
+                                placeholder="password"
+                              />
+                              <div
+                                class="alert alert-danger"
+                                *ngIf="
+                                  loginForm.controls.password.errors &&
+                                  (loginForm.controls.password.touched ||
+                                    loginForm.controls.password.dirty)
+                                "
+                              >
+                                <div
+                                  *ngIf="
+                                    loginForm.hasError('required', 'password')
+                                  "
+                                >
+                                  password* is required
+                                </div>
+                                <div
+                                  *ngIf="
+                                    loginForm.hasError('pattern', 'password')
+                                  "
+                                >
+                                  password Must contain at least one number and
+                                  one uppercase and lowercase letter, and at
+                                  least 8 or more characters
+                                </div>
+                              </div>
+                            </div>
+                            <button
+                              type="submit"
+                              class="aa-browse-btn"
+                              [disabled]="!loginForm.valid"
+                              (click)="login(loginForm)"
+                            >
+                              Login
+                            </button>
+                            <label for="rememberme"
+                              ><input type="checkbox" id="rememberme" />
+                              Remember me
+                            </label>
+                            <p class="aa-lost-password">
+                              <a style="cursor: pointer;"
+                                >Lost your password?</a
+                              >
+                            </p>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- Shipping Address -->
+                    <div class="panel panel-default aa-checkout-billaddress">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a
+                            data-toggle="collapse"
+                            data-parent="#accordion"
+                            href="#collapseFour"
+                          >
+                            Shippping Address
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="aa-checkout-single-bill">
+                                <label for="fullName">Full Name*:</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="fullName"
+                                  placeholder="full Name"
+                                  name="fullName"
+                                  formControlName="fullName"
+                                />
+                                <div
+                                  class="alert alert-danger"
+                                  *ngIf="
+                                    ShippingForm.controls.fullName.errors &&
+                                    (ShippingForm.controls.fullName.touched ||
+                                      ShippingForm.controls.fullName.dirty)
+                                  "
+                                >
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError(
+                                        'required',
+                                        'fullName'
+                                      )
+                                    "
+                                  >
+                                    fullName* is required
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError(
+                                        'minlength',
+                                        'fullName'
+                                      )
+                                    "
+                                  >
+                                    fullName is minlength 8
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError(
+                                        'maxlength',
+                                        'fullName'
+                                      )
+                                    "
+                                  >
+                                    fullName is maxlength
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError('fullName', 'email')
+                                    "
+                                  >
+                                    fullName must be a valid email address
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="aa-checkout-single-bill">
+                                <label for="phoneNumber">phone Number *:</label>
+                                <input
+                                  type="tel"
+                                  class="form-control"
+                                  id="phoneNumber"
+                                  placeholder="phoneNumber"
+                                  name="phoneNumber"
+                                  formControlName="phoneNumber"
+                                />
+                                <div
+                                  class="alert alert-danger"
+                                  *ngIf="
+                                    ShippingForm.controls.phoneNumber.errors &&
+                                    (ShippingForm.controls.phoneNumber
+                                      .touched ||
+                                      ShippingForm.controls.phoneNumber.dirty)
+                                  "
+                                >
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError(
+                                        'required',
+                                        'phoneNumber'
+                                      )
+                                    "
+                                  >
+                                    phoneNumber* is required
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError(
+                                        'minlength',
+                                        'phoneNumber'
+                                      )
+                                    "
+                                  >
+                                    phoneNumber is minlength 8
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError(
+                                        'maxlength',
+                                        'phoneNumber'
+                                      )
+                                    "
+                                  >
+                                    phoneNumber is maxlength
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="aa-checkout-single-bill">
+                                <label for="phoneNumber">Address *:</label>
+                                <textarea
+                                  formControlName="address"
+                                  cols="8"
+                                  rows="3"
+                                >
+      Address*</textarea
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="aa-checkout-single-bill">
+                                <label for="phoneNumber">Country *:</label>
+                                <select
+                                  formControlName="country"
+                                  class="form-control"
+                                >
+                                  <option value="">Select Your Country</option>
+                                  <option value="Australia">Australia</option>
+                                  <option value="Afganistan">Afganistan</option>
+                                  <option value="Bangladesh">Bangladesh</option>
+                                  <option value="Belgium">Belgium</option>
+                                  <option value="Brazil">Brazil</option>
+                                  <option value="Canada">Canada</option>
+                                  <option value="China">China</option>
+                                  <option value="Denmark">Denmark</option>
+                                  <option value="Egypt">Egypt</option>
+                                  <option value="India">India</option>
+                                  <option value="Iran">Iran</option>
+                                  <option value="Mexico">Mexico</option>
+                                  <option value="UAE">UAE</option>
+                                  <option value="UK">UK</option>
+                                  <option value="USA">USA</option>
+                                  <option value="KSA">KSA</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="aa-checkout-single-bill">
+                                <label for="city">City*:</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="city"
+                                  placeholder="city"
+                                  name="city"
+                                  formControlName="city"
+                                />
+                                <div
+                                  class="alert alert-danger"
+                                  *ngIf="
+                                    ShippingForm.controls.city.errors &&
+                                    (ShippingForm.controls.city.touched ||
+                                      ShippingForm.controls.city.dirty)
+                                  "
+                                >
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError('required', 'city')
+                                    "
+                                  >
+                                    city* is required
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError('minlength', 'city')
+                                    "
+                                  >
+                                    city is minlength 8
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError('maxlength', 'city')
+                                    "
+                                  >
+                                    city is maxlength
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="aa-checkout-single-bill">
+                                <label for="state">State*:</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="state"
+                                  placeholder="state"
+                                  name="state"
+                                  formControlName="state"
+                                />
+                                <div
+                                  class="alert alert-danger"
+                                  *ngIf="
+                                    ShippingForm.controls.state.errors &&
+                                    (ShippingForm.controls.state.touched ||
+                                      ShippingForm.controls.state.dirty)
+                                  "
+                                >
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError('required', 'state')
+                                    "
+                                  >
+                                    state* is required
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError(
+                                        'minlength',
+                                        'state'
+                                      )
+                                    "
+                                  >
+                                    state is minlength 8
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="aa-checkout-single-bill">
+                                <label for="zipCode">zipCode*:</label>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="zipCode"
+                                  placeholder="zipCode"
+                                  name="zipCode"
+                                  formControlName="zipCode"
+                                />
+                                <div
+                                  class="alert alert-danger"
+                                  *ngIf="
+                                    ShippingForm.controls.zipCode.errors &&
+                                    (ShippingForm.controls.zipCode.touched ||
+                                      ShippingForm.controls.zipCode.dirty)
+                                  "
+                                >
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError(
+                                        'required',
+                                        'zipCode'
+                                      )
+                                    "
+                                  >
+                                    zipCode* is required
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError(
+                                        'minlength',
+                                        'zipCode'
+                                      )
+                                    "
+                                  >
+                                    zipCode is minlength 8
+                                  </div>
+                                  <div
+                                    *ngIf="
+                                      ShippingForm.hasError(
+                                        'maxlength',
+                                        'zipCode'
+                                      )
+                                    "
+                                  >
+                                    zipCode is maxlength
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="aa-checkout-single-bill">
+                                <label for="specialNotes">Special Notes*</label>
+                                <textarea
+                                  cols="8"
+                                  rows="3"
+                                  class="form-control"
+                                  formControlName="specialNotes"
+                                >
+                                        Special Notes</textarea
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="checkout-right">
+                  <h4>Order Summary</h4>
+                  <div class="aa-order-summary-area">
+                    <table class="table table-responsive">
+                      <thead>
+                        <tr>
+                          <th>Product</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>T-Shirt <strong> x 1</strong></td>
+                          <td>$150</td>
+                        </tr>
+                        <tr>
+                          <td>Polo T-Shirt <strong> x 1</strong></td>
+                          <td>$250</td>
+                        </tr>
+                        <tr>
+                          <td>Shoes <strong> x 1</strong></td>
+                          <td>$350</td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th>Subtotal</th>
+                          <td>$750</td>
+                        </tr>
+                        <tr>
+                          <th>Tax</th>
+                          <td>$35</td>
+                        </tr>
+                        <tr>
+                          <th>Total</th>
+                          <td>$785</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <h4>Payment Method</h4>
+                  <div class="aa-payment-method">
+                    <label for="cashdelivery"
+                      ><input
+                        type="radio"
+                        id="cashdelivery"
+                        name="optionsRadios"
+                      />
+                      Cash on Delivery
+                    </label>
+                    <label for="paypal"
+                      ><input
+                        type="radio"
+                        id="paypal"
+                        name="optionsRadios"
+                        checked
+                      />
+                      Via Paypal
+                    </label>
+                    <img
+                      src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg"
+                      border="0"
+                      alt="PayPal Acceptance Mark"
+                    />
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      [disabled]="!ShippingForm.valid"
+                      (click)="setUserOrder(ShippingForm)"
+                    >
+                      Save Shipping
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / Cart view section -->

@@ -1,0 +1,24 @@
+<!-- product category -->
+<section id="aa-product-details">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="aa-product-details-area">
+          <!-- Related product -->
+          <div class="aa-product-related-item">
+            <h3>Related Products</h3>
+            <div class="container">
+              <div class="row">
+                <div *ngIf="searchValue">
+                  <div style="cursor: pointer; padding: 0 ;margin: 0;" class="alert alert-light" role="alert"
+                    *ngFor="let product of products$ | async" (click)="view(product.productId)">{{product.productName}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / product category -->
